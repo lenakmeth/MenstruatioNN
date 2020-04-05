@@ -11,12 +11,12 @@ from keras.models import load_model
 # Load datasets
 periods = read_period_file("calendar.txt")
 train_x, train_y, test_x, test_y, last_known_period = make_train_test_sets(periods)
-train = False
+train = True
 
 if train:
     # Configuration
     n_steps = 3
-    n_epochs = 10000
+    n_epochs = 4000
     n_features = train_x.shape[2]
     
     # LSTM model
@@ -44,7 +44,7 @@ if train:
     print("Saved model to disk")
 
 # Load model if saved
-model = load_model("lstm_10000.h5")
+model = load_model("lstm_4000.h5")
 model.summary()
 
 # Make predictions
