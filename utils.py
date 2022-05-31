@@ -41,8 +41,9 @@ def read_period_file(file):
     return periods
 
 
-def sliding_windows(periods):
+def make_train_test_sets(periods):
     """ Split into training and test sets, augment the data. """
+
     x = []
     y = []
 
@@ -56,17 +57,8 @@ def sliding_windows(periods):
 
     assert len(x) == len(y)
 
-    return x, y
-
-
-def make_train_test_sets(periods):
-    """ Split into training and test sets, augment the data. """
-
-    x, y = sliding_windows(periods)
-
-    x = x * 5
-    y = y * 5
-
+    # x = x * 5
+    # y = y * 5
     train_size = int(len(y) * 0.8)
 
     train_x = np.array(x[0:train_size])
@@ -80,6 +72,41 @@ def make_train_test_sets(periods):
     last_known_period = (periods*5)[train_size][0]
 
     return train_x, train_y, test_x, test_y, last_known_period
+
+
+def load_synthetic_data(file):
+    """ Split into training and test sets, augment the data. """
+    
+    periods = []
+    with open(file, 'r') as f:
+        for line in f:
+            periods.append([int(x) for x in line.strip().split('\t')])
+
+    x = []
+    y = []
+
+    for period in periods[:-3]:
+        p_index = periods.index(period)
+        x.append([])
+        x[-1].append([period[-2], period[-1]])
+        x[-1].append([periods[p_index + 1][-2], periods[p_index + 1][-1]])
+        x[-1].append([periods[p_index + 2][-2], periods[p_index + 2][-1]])
+        y.append([periods[p_index + 3][-2], periods[p_index + 3][-1]])
+
+    assert len(x) == len(y)
+
+    # x = x * 5
+    # y = y * 5
+
+    train_size = int(len(y) * 0.8)
+
+    train_x = np.array(x[0:train_size])
+    train_y = np.array(y[0:train_size])
+
+    test_x = np.array(x[train_size : len(x)])
+    test_y = np.array(y[train_size : len(y)])
+
+    return train_x, train_y, test_x, test_y
 
 
 def evaluate_predictions(test_y, predictions):

@@ -7,11 +7,17 @@ from keras.layers import LSTM
 from keras.layers import Dense
 from keras import metrics
 from keras.models import load_model
+import numpy as np
 
 # Load datasets
 periods = read_period_file("calendar.txt")
-train_x, train_y, test_x, test_y, last_known_period = make_train_test_sets(periods)
-train = False
+train_x, train_y, _, _ = load_synthetic_data("synthetic_data.txt")
+train_x_, train_y_, test_x, test_y, last_known_period = make_train_test_sets(periods)
+
+train_x = np.array(train_x.tolist() + train_x_.tolist())
+train_y = np.array(train_y.tolist() + train_y_.tolist())
+
+train = True
 n_epochs = 4000
 
 if train:
