@@ -3,7 +3,7 @@
 
 import numpy as np
 from datetime import datetime, timedelta
-
+from random import shuffle
 
 def read_period_file(file):
     """ Opens the .txt file of the period calendar app. This function is meant 
@@ -57,10 +57,10 @@ def make_train_test_sets(periods):
 
     assert len(x) == len(y)
 
-    # x = x * 5
-    # y = y * 5
+    x = x * 5
+    y = y * 5
     train_size = int(len(y) * 0.8)
-
+    
     train_x = np.array(x[0:train_size])
     train_y = np.array(y[0:train_size])
 
@@ -95,8 +95,8 @@ def load_synthetic_data(file):
 
     assert len(x) == len(y)
 
-    # x = x * 5
-    # y = y * 5
+    x = x * 5
+    y = y * 5
 
     train_size = int(len(y) * 0.8)
 

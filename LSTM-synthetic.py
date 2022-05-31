@@ -10,12 +10,18 @@ from keras.models import load_model
 import numpy as np
 
 # Load datasets
-periods = read_period_file("calendar.txt")
+
+# Load synthetic data
 train_x, train_y, _, _ = load_synthetic_data("synthetic_data.txt")
+
+# Load real data
+periods = read_period_file("calendar.txt")
 train_x_, train_y_, test_x, test_y, last_known_period = make_train_test_sets(periods)
 
+# Append real data to synthetic data
 train_x = np.array(train_x.tolist() + train_x_.tolist())
 train_y = np.array(train_y.tolist() + train_y_.tolist())
+
 
 train = True
 n_epochs = 4000
@@ -59,7 +65,10 @@ y_preds = model.predict(test_x, verbose=0)
 predictions = [[int(round(i[0])), int(round(i[1]))] for i in y_preds]
 accuracies = evaluate_predictions(test_y, predictions)
 
-print("Accuracy of menstrual cycle length prediction: ", accuracies[0])
-print("Accuracy of menstruation length prediction: ", accuracies[1])
+print("Accuracy of menstrual cycle length prediction: ", round(accuracies[0], 4))
+print("Accuracy of menstruation length prediction: ", round(accuracies[1], 4))
 # print("Next periods: ")
 # next_periods = print_predictions(last_known_period, predictions)
+
+print(len(train_y))
+print(len(test_y))
