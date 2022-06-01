@@ -20,15 +20,14 @@ There is also a file with synthetic data, which is used ofr training.
 
 ## Results
 
-|            Training             | Training |   Test   | Train  |  Accuracy pred.  |    Accuracy pred.   |
-|               Set               | set size | set size | Epochs | mensturation day | menstruation length |
-|:-------------------------------:|:--------:|---------:|:------:|:----------------:|:-------------------:|
-|   Real data (no augmentation)   |    78    |    20    |  4000  |       0.25       |         0.45        |
-|          Real data (x5)         |   392    |    98    |  4000  |       **0.98**       |         **0.96**        |
-|     Real data (x5) shuffled     |   392    |    98    |  4000  |       0.20       |         0.46        |
-|          Synthetic data         |  1988    |    98    |  4000  |       0.14       |         0.38        |
-|    Synthetic data + Real data   |  2066    |    98    |  4000  |       0.67       |         0.86        |
-| Synthetic data + Real data (x5) |  2380    |    98    |  4000  |       **0.98**       |         **0.96**        |
+|            Train set            | Train set size | Test set size | Epochs | Acc. menstr. day | Acc. menst. length |
+|:-------------------------------:|:--------------:|:-------------:|:------:|:----------------:|:------------------:|
+|   Real data (no augmentation)   |       78       |       20      |  4000  |       0.25       |        0.45        |
+|          Real data (x5)         |       392      |       98      |  4000  |       **0.98**       |        **0.96**        |
+|     Real data (x5) shuffled     |       392      |       98      |  4000  |        0.2       |        0.46        |
+|          Synthetic data         |      1988      |       98      |  4000  |       0.14       |        0.38        |
+|    Synthetic data + Real data   |      2066      |       98      |  4000  |       0.67       |        0.86        |
+| Synthetic data + Real data (x5) |      2380      |       98      |  4000  |       **0.98**       |        **0.96**        |
 
 ## References
 
