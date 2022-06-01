@@ -129,5 +129,5 @@ dmypy.json
 .pyre/
 
 # H5 models
-.h5
-.txt
+*.h5
+calendar.txt

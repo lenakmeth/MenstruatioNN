@@ -19,8 +19,8 @@ periods = read_period_file("calendar.txt")
 train_x_, train_y_, test_x, test_y, last_known_period = make_train_test_sets(periods)
 
 # Append real data to synthetic data
-train_x = np.array(train_x.tolist() + train_x_.tolist())
-train_y = np.array(train_y.tolist() + train_y_.tolist())
+train_x = np.array(train_x.tolist() + train_x_.tolist()[-78:])
+train_y = np.array(train_y.tolist() + train_y_.tolist()[-78:])
 
 
 train = True
